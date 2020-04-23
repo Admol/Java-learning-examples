@@ -43,7 +43,7 @@
 
         <lombok.version>1.16.8</lombok.version>
         <dubbo.version>2.5.3</dubbo.version>
-        <zookeeper.version>3.4.6</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <HikariCP.version>2.6.3</HikariCP.version>
 	</properties>
 
