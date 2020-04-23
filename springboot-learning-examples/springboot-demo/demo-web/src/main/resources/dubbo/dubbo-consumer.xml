@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-lazy-init="false">
+
+    <!-- 使用zookeeper广播注册中心暴露服务地址 -->
+    <dubbo:registry id="zk1" protocol="zookeeper" address="${zk1.address}"
+                    timeout="20000"/>
+
+    <!-- 使用zookeeper广播注册中心暴露服务地址 -->
+    <dubbo:registry id="zk2" protocol="zookeeper" address="${zk2.address}"
+                    timeout="20000"/>
+    <dubbo:consumer timeout="30000" check="false"/>
+
+    <dubbo:reference  registry="zk1" id="radarServiceFacade"
+                      interface="com.xinyan.gateway.core.facade.RadarServiceFacade"
+                      retries="0" version="1.0.0" timeout="20000"/>
+</beans>

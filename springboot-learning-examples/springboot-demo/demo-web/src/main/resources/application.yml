@@ -1,0 +1,30 @@
+spring:
+  http:
+    encoding:
+      charset: utf-8
+      force: false
+      enabled: false
+  profiles:
+    active: dev
+
+server:
+  port: 9898
+  servlet:
+    path: /demo
+
+##日志配置文件
+logging:
+  config: classpath:logback/logback.xml
+
+jdbc:
+  driver: com.mysql.jdbc.Driver
+  master:
+    url:jdbc: mysql://10.0.xx.xx:3306/xxx
+    username: xxx
+    password: xxx
+    maxPoolSize: 50
+  other:
+    url: jdbc:mysql://10.0.xx.xx:3306/xxx
+    username: xxx
+    password: xxx
+    maxPoolSize: 50

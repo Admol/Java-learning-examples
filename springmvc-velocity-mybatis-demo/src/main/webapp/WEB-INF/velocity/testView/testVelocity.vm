@@ -1,0 +1,6 @@
+$!test
+
+#foreach($userInfo in $!list)
+	</br>
+$!{velocityCount}.	$!userInfo.userName 
+#end

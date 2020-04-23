@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/tx
+      		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+			http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+	
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurerForJDBC"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="location" value="classpath:jdbc-test.properties" />
+	</bean>
+	
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
+        destroy-method="close">  
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/demo" />  
+        <property name="username" value="test" />  
+        <property name="password" value="123456" />  
+        <!-- 初始化连接大小 -->  
+        <property name="initialSize" value="5"></property>  
+        <!-- 连接池最大数量 -->  
+        <property name="maxActive" value="20"></property>  
+        <!-- 连接池最大空闲 -->  
+        <property name="maxIdle" value="20"></property>  
+        <!-- 连接池最小空闲 -->  
+        <property name="minIdle" value="1"></property>  
+        <!-- 获取连接最大等待时间 -->  
+        <property name="maxWait" value="60000"></property>  
+    </bean>  
+	
+   	<!--  spring和MyBatis完美整合，不需要mybatis的配置映射文件   -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+		<!-- 自动扫描mapper.xml文件   -->
+        <property name="mapperLocations" value="classpath:sqlmap/*.xml"></property>  
+    </bean>  
+   
+    <!--  DAO接口所在包名，Spring会自动查找其下的类  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="net.admol.baseweb.dal.dao" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+    </bean>   
+    
+
+    
+</beans>

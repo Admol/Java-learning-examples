@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property resource="logback/logback.properties" />
+
+    <conversionRule conversionWord="logId" converterClass="net.admol.example.util.UuidConvert" />
+
+    <!-- error 级别日志文件 -->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <File>${logger.logRoot}/${logger.name}-error.log</File>
+        <encoder>
+            <Pattern>[%date] [%-5level] %c{40} %line --%mdc{client} [%logId] %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logger.logRoot}/${logger.name}-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>512MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 普通日志文件,排除错误日志 -->
+    <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logger.logRoot}/${logger.name}.log</File>
+        <encoder>
+            <Pattern>[%date] [%-5level] %c{40} %line --%mdc{client} [%logId] %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logger.logRoot}/${logger.name}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>512MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+    <!-- 管控台日志打印，发布生产需注释 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="utf-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <!-- %.-1level 只显示信息级别的首字母,%-5level 左对齐显示信息级别全称 -->
+            <!-- 如需自定义关键字，用 %mdc{键名} 表示,程序中用MDC.put("键名","键值")设置，可动态设置 [%logger:%line]-->
+            <Pattern>[%d] [%-5level] %logger{0} %line -- [%logId] %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- 外部jar包 日志级别设置 -->
+    <logger level="${logger.outside.logLevel}" name="com.ibatis" />
+    <logger level="${logger.outside.logLevel}" name="com.mchange" />
+    <logger level="${logger.outside.logLevel}" name="com.mangofactory"/>
+    <logger level="${logger.outside.logLevel}" name="java.sql"/>
+    <logger level="${logger.outside.logLevel}" name="ch.qos.logback"/>
+    <logger level="${logger.outside.logLevel}" name="com.alibaba"/>
+    <logger level="${logger.outside.logLevel}" name="org"/>
+    <logger level="${logger.outside.logLevel}" name="jndi"/>
+    <logger level="${logger.outside.logLevel}" name="org.jdbcdslog"/>
+    <logger level="${logger.outside.logLevel}" name="kafka"/>
+    <logger level="${logger.logLevel}"         name="com.system"/>
+
+    <logger level="${logger.logLevel}" name="com.xxx" additivity="false">
+        <!-- 去除错误日志 -->
+        <appender-ref ref="logfile"/>
+        <!-- 只打印错误日志 -->
+        <appender-ref ref="error"/>
+        <appender-ref ref="STDOUT"/>
+
+    </logger>
+    <!-- 输出到文件 -->
+
+    <root level="${logger.logLevel}">
+        <!-- 默认 -->
+        <appender-ref ref="logfile"/>
+    </root>
+
+    <!--&lt;!&ndash;输出到控制台和文件，可定义更多的 Appender&ndash;&gt;-->
+    <root level="INFO" name="net.admol">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
