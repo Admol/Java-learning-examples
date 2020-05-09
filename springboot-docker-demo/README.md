@@ -8,8 +8,8 @@
 
 **三:检测结果**
 - 浏览器验证
-    - 访问 ``http://localhost:8088/hello```
+    - 访问 ``http://localhost:8088/hello``
 - docker 验证
     - 运行``docker ps`` 命令查看运行中的容器
 - docker 容器日志验证
-    - docker logs containerid -f
+    - ``docker logs containerid -f``

@@ -15,4 +15,13 @@ public class HelloDockerController{
         System.out.println("hello,this is a spring web docker demo!");
         return "hello,this is a spring web docker demo!";
     }
+    @RequestMapping("/bug")
+    public String bug(){
+        System.out.println("hello,this is a bug!");
+        Boolean flag = true;
+        while(flag){
+
+        }
+        return "hello,this is a bug!";
+    }
 }
