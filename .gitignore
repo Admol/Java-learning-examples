@@ -36,3 +36,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/algorithm-learning-examples/.mvn/
+/algorithm-learning-examples/mvnw
+/algorithm-learning-examples/mvnw.cmd
