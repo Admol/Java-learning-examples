@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class MyCircularQueue<T>{
     /**数据数组*/
-    private T dataArray[];
+    private T[] dataArray;
     /**队列数据实际长度*/
     private int capacity = 0;
     /**head 指针，指向队头*/
@@ -65,22 +65,5 @@ public class MyCircularQueue<T>{
             data.append(",");
         }
         System.out.println("队头:"+head+" 队尾:"+tail+ "  data:"+data.toString());
-    }
-
-    public static void main(String[] args){
-        int count = f(4);
-        System.out.println(count);
-    }
-
-    private static int f(int n){
-        if (n == 1) return 1;
-        if (n == 2) return 2;
-        HashMap<Integer,Integer> hashMap = new HashMap();
-        if (hashMap.containsKey(n)) {
-            return hashMap.get(n);
-        }
-        int result = f(n-1) + f(n-2);
-        hashMap.put(n, result);
-        return result;
     }
 }

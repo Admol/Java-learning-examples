@@ -10,7 +10,7 @@ package com.admol.algorithm.datastructure.queue;
 public class MyArrayQueue{
 
     /**数据数组*/
-    private String dataArray[];
+    private String[] dataArray;
     /**队列数据实际长度*/
     private int capacity = 0;
     /**head 指针，指向队头*/
@@ -32,11 +32,12 @@ public class MyArrayQueue{
         //1.校验队列是否已经满了
         if(tail == capacity){
             if(head == 0){
-                // 队头还在第一个
+                // 队头还在第一个, 证明队列是满的, 比如:入队后可能没有过出队,队列满
                 return false;
             }
             // 数据迁移, 从head-tail 迁移到0, tail-head-1
             for(int i=head;i<tail;i++){
+                // 数据有过出队, 将数据整理到[0,tail-head-1]
                 dataArray[i-head] = dataArray[i];
             }
             // 重置队尾和队头的指针
@@ -72,6 +73,18 @@ public class MyArrayQueue{
             data.append(dataArray[i]);
             data.append(",");
         }
+        if(dataArray.length > 0){
+            data.deleteCharAt(data.lastIndexOf(","));
+        }
         System.out.println("队头:"+head+" 队尾:"+tail+ "  data:"+data.toString());
+    }
+
+    public static void main(String[] args){
+
+        StringBuffer data = new StringBuffer("123456,352,4435,");
+        data.deleteCharAt(data.lastIndexOf(","));
+        StringBuffer data2 = new StringBuffer("123456");
+        System.out.println(data.toString());
+        System.out.println(data2.toString());
     }
 }
