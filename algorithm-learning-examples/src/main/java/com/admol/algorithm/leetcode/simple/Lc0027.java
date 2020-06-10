@@ -28,6 +28,11 @@ public class Lc0027{
         int n = nums.length;
         while (i < n) {
             if (nums[i] == val) {
+                if(nums[n - 1] == val){
+                    // 如果尾巴的也是需要移除的, 无需执行下面的交换动作
+                    n--;
+                    continue;
+                }
                 // 将当前元素与最后一个元素进行交换
                 nums[i] = nums[n - 1];
                 // 尾巴指针前移
