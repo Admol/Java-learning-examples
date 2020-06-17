@@ -7,7 +7,7 @@ package com.admol.algorithm.leetcode;
  * @Date : 2020/6/16
  */
 public class TreeNode{
-    int val;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode(int x,TreeNode l,TreeNode r) {
