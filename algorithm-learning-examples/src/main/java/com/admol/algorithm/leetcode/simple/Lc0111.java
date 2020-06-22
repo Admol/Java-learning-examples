@@ -21,7 +21,7 @@ import java.util.Queue;
  * @author : admol
  * @Date : 2020/6/22
  */
-public class Lc111{
+public class Lc0111{
 
     /**
      * 递归,深度优先
