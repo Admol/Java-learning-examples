@@ -7,7 +7,7 @@ package com.admol.algorithm.leetcode;
 public class ListNode{
     public ListNode next;
     public int val;
-    ListNode(int x) {
+    public ListNode(int x) {
       val = x;
       next = null;
     }
