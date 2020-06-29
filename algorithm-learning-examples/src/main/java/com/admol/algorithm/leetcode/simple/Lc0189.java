@@ -26,8 +26,50 @@ import java.util.Arrays;
  * @Date : 2020/6/28
  */
 public class Lc0189{
+    /**
+     * 使用反转
+     * 原始数组                  : 1 2 3 4 5 6 7
+     * 反转所有数字后             : 7 6 5 4 3 2 1
+     * 反转前 k 个数字后          : 5 6 7 4 3 2 1
+     * 反转后 n-k 个数字后        : 5 6 7 1 2 3 4 --> 结果
+     * @param nums
+     * @param k
+     */
+    public static void rotate(int[] nums, int k) {
+        int len  = nums.length;
+        k = k % len;
+        if(k == 0 || len < 2){
+            return;
+        }
+        // 1.反转整个数组
+        reverse(nums,0,len-1);
+        // 2. 反转前k个数字
+        reverse(nums,0,k-1);
+        // 3. 反正后面n-k个数字
+        reverse(nums,k,len-1);
+        // 打印输出
+        Arrays.stream(nums).forEach(a->System.out.print(a + " "));
+        System.out.println();
+    }
 
     /**
+     * 反转指定区间的数组
+     * @param nums
+     * @param l
+     * @param r
+     */
+    private static void reverse(int[] nums,int l,int r){
+        while(l<r){
+            int temp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = temp;
+            l++;
+            r--;
+        }
+    }
+
+    /**
+     * 循环替换
      * 输入: [1,2,3,4,5,6,7] 和 k
      * 输入: [1,2,3,4,5,6,7] 和 k = 3
      * 输出: [5,6,7,1,2,3,4]
@@ -110,11 +152,11 @@ public class Lc0189{
     }
 
     public static void main(String[] args){
-//        rotate(new int[]{1,2},1);
-//        rotate(new int[]{1,2,3},3);
-        rotate2(new int[]{1,2,3,4},2);
-//        rotate(new int[]{1,2,3,4,5,6,7},1);
-        rotate2(new int[]{1,2,3,4,5,6,7},3);
-        rotate2(new int[]{1,2,3,4,5,6,7,8},3);
+        rotate(new int[]{1,2},1);
+        rotate(new int[]{1,2,3},3);
+        rotate(new int[]{1,2,3,4},2);
+        rotate(new int[]{1,2,3,4,5,6,7},1);
+        rotate(new int[]{1,2,3,4,5,6,7},3);
+        rotate(new int[]{1,2,3,4,5,6,7,8},3);
     }
 }
