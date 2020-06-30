@@ -1,6 +1,5 @@
 package com.admol.algorithm.leetcode.simple;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
