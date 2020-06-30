@@ -17,7 +17,7 @@ package com.admol.algorithm.leetcode.simple;
  * @author : admol
  * @Date : 2020/6/29
  */
-public class Lc0196{
+public class Lc0198{
 
     /**
      * 动态规划+数组
