@@ -49,7 +49,7 @@ public class Lc0225{
          */
         public void push(int x) {
             //需要每次加入到队列的对头
-            queue.addFirst(x);
+            //queue.addFirst(x);
             // 不用addFirst
             queue.add(x);
             int sz = queue.size();
