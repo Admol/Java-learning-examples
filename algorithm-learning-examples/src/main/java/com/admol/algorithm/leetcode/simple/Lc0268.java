@@ -15,7 +15,7 @@ package com.admol.algorithm.leetcode.simple;
  * @author : admol
  * @Date : 2020/7/6
  */
-public class lc0268{
+public class Lc0268{
 
     /**
      * 异或运算规律:
@@ -27,14 +27,16 @@ public class lc0268{
      * @return
      */
     public static int missingNumber(int[] nums) {
-        int res = -1;
+        int res = 0;
         for(int i = 0; i < nums.length; i++){
-            res = (i ^ nums[i]);
+            res ^= (i ^ nums[i]);
         }
         return res ^ nums.length;
     }
 
     public static void main(String[] args){
+        System.out.println(missingNumber(new int[]{3,0,1}));
+        System.out.println(missingNumber(new int[]{0,1,3}));
         System.out.println(missingNumber(new int[]{0,1,2,3,4,6}));
         System.out.println(missingNumber(new int[]{0,1,2,3,4,5}));
         System.out.println(3 ^ 6);

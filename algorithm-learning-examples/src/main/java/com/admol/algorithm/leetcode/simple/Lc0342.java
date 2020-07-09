@@ -22,7 +22,7 @@ public class Lc0342{
      * @param num
      * @return
      */
-    public boolean isPowerOfFour(int num) {
+    public static boolean isPowerOfFour(int num) {
         return (num > 0) && (Math.log(num) / Math.log(2) % 2 == 0);
     }
     /**
