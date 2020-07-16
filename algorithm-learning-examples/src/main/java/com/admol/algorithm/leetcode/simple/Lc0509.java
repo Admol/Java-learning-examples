@@ -25,7 +25,7 @@ package com.admol.algorithm.leetcode.simple;
  * @author : jingling
  * @Date : 2020/7/13
  */
-public class Lc509{
+public class Lc0509{
 
     /**
      * 借用数组
