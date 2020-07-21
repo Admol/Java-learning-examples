@@ -1,9 +1,5 @@
 package com.admol.algorithm.leetcode.simple;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 标签:数组
