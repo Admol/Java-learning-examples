@@ -1,4 +1,4 @@
-package com.admol.algorithm.leetcode;
+package com.admol.algorithm.leetcode.simple;
 
 /**
  * Nim 游戏
