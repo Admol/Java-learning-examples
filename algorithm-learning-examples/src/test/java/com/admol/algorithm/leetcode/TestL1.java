@@ -1,6 +1,6 @@
 package com.admol.algorithm.leetcode;
 
-import com.admol.algorithm.leetcode.simple.Lc001;
+import com.admol.algorithm.leetcode.simple.array.Lc001;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
