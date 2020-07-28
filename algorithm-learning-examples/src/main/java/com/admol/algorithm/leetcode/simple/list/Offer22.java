@@ -15,16 +15,45 @@ import com.admol.algorithm.leetcode.ListNode;
  */
 public class Offer22{
 
+    /**
+     * 快慢指针
+     * @param head
+     * @param k
+     * @return
+     */
     public static ListNode getKthFromEnd(ListNode head,int k) {
+        ListNode slow = head;
+        ListNode fast = head;
+        // 1.fast 先走k步, 和slow保持k的距离
+        while(--k >= 0){
+            fast = fast.next;
+        }
+        // 2.快慢指针一起走, 知直到快指针走到末尾
+        while(fast != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /**
+     * 统计链表总长度
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode getKthFromEnd1(ListNode head,int k) {
 
         int count = 0;
         ListNode node = head;
+        // 1.统计链表的长度
         while(node != null){
             count++;
             node = node.next;
         }
 
         node = head;
+        // 2.从头结点移动count-k
         for(int i = 0; i < count-k; i++){
             node = node.next;
         }
