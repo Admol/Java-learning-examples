@@ -1,5 +1,7 @@
 package com.admol.algorithm.leetcode.simple.tree;
 
+import com.admol.algorithm.leetcode.TreeNode;
+
 /**
  * 给定两个二叉树，编写一个函数来检验它们是否相同。
  * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
@@ -34,7 +36,7 @@ public class Lc0100{
      * @param q
      * @return
      */
-    public static boolean isSameTree(TreeNode p, TreeNode q) {
+    public static boolean isSameTree(TreeNode p,TreeNode q) {
         // 1.比较当前节点
         if(p == null && q == null){
             return true;
@@ -48,17 +50,6 @@ public class Lc0100{
         // 2.继续递归比较左子树 和 右子树
         return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
-
-     public static class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode(int x,TreeNode l,TreeNode r) {
-              val = x;
-              left = l;
-              right = r;
-          }
-      }
 
     public static void main(String[] args){
 //        TreeNode p = new TreeNode(1,new TreeNode(2,null,null),new TreeNode(3,null,null));
