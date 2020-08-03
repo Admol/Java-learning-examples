@@ -72,4 +72,9 @@ public class Lc0669{
         root.right = trimBST(root.right,L,R);
         return root;
     }
+
+    public static void main(String[] args){
+        TreeNode root = new TreeNode(1,new TreeNode(0),new TreeNode(2));
+        System.out.println(new Lc0669().trimBST(root,1,2));
+    }
 }
