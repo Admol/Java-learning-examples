@@ -42,9 +42,8 @@ import java.util.HashSet;
 public class Lc0653{
 
     HashSet<Integer> set = new HashSet<>();
-
     /**
-     *
+     * 中序遍历产生的序列是升序的, 所以也可以选择先中序遍历, 产生一个有序序列, 然后查找
      * @param root
      * @param k
      * @return
