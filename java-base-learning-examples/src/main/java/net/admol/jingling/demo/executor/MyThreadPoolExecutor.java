@@ -161,7 +161,6 @@ public class MyThreadPoolExecutor implements Executor{
         Runnable t = task;
         while(t != null || (t = getTask()) != null){
             try{
-                log.info(Thread.currentThread().getName()+" is running");
                 t.run();
             }catch(Exception e){
                 throw e;

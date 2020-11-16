@@ -20,17 +20,18 @@ public class TestMyThreadPool{
                 @SneakyThrows
                 @Override
                 public void run(){
-                    System.out.println("执行任务:"+taskIndex.getAndIncrement());
+                    System.out.println(Thread.currentThread().getName()+" is running 执行任务:"+taskIndex.getAndIncrement());
                     // coreSize 为2时, 2秒足以, 不会出现maxSize的线程
-//                    TimeUnit.MILLISECONDS.sleep(800);
+                    TimeUnit.MILLISECONDS.sleep(800);
                     // coreSize 线程处理不过来, 会启用max线程
 //                    TimeUnit.MILLISECONDS.sleep(3000);
                     // max线程处理不过来, 会启用队列, 队列满了, 会执行拒绝策略
-                    TimeUnit.MILLISECONDS.sleep(4000);
+//                    TimeUnit.MILLISECONDS.sleep(4000);
                 }
             });
+            TimeUnit.MILLISECONDS.sleep(100);
             // 每隔1s提交一个任务
-            TimeUnit.MILLISECONDS.sleep(1000);
+//            TimeUnit.MILLISECONDS.sleep(1000);
         }
     }
 }
