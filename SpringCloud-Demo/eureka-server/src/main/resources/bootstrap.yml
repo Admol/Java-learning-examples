@@ -1,0 +1,14 @@
+server:
+  port: 8080 # 服务端口
+
+
+eureka:
+  client:
+    register-with-eureka: false #不将自己的实例注册到 Eureka Server
+    fetch-registry: false #不从 Eureka Server 中获取 Eureka 的注册表信息
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/  #不指定会报错： Connect to localhost:8761 timed out
+  instance:
+    hostname: eureka-server
+  server:
+    enable-self-preservation: true # 开启自我保护机制，默认也是开启的

@@ -7,6 +7,9 @@
 *.jar
 *.war
 *.ear
+**/**/*.jar
+**/**/*.war
+**/**/*.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -39,3 +42,12 @@ nbdist/
 /algorithm-learning-examples/.mvn/
 /algorithm-learning-examples/mvnw
 /algorithm-learning-examples/mvnw.cmd
+/SpringCloud-Demo/demo/.mvn/wrapper
+/SpringCloud-Demo/eurela-client/mvnw
+/SpringCloud-Demo/eurela-client/.mvn/wrapper
+/SpringCloud-Demo/eureka-server/.mvn/wrapper
+/SpringCloud-Demo/eureka-server/mvnw
+/SpringCloud-Demo/eureka-server/mvnw.cmd
+/SpringCloud-Demo/demo/mvnw.cmd
+/SpringCloud-Demo/demo/mvnw
+/SpringCloud-Demo/eurela-client/mvnw.cmd

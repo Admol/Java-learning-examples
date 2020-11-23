@@ -1,0 +1,8 @@
+
+server:
+  port: 8088 # 服务端口
+
+eureka:
+  client:
+    register-with-eureka: false #不将自己的实例注册到 Eureka Server
+    fetch-registry: false #不从 Eureka Server 中获取 Eureka 的注册表信息
