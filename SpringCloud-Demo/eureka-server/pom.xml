@@ -72,5 +72,19 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
-
+<!--    <profiles>-->
+<!--        &lt;!&ndash; 加载 properties 配置文件 (master 环境)     默认 &ndash;&gt;-->
+<!--        <profile>-->
+<!--            <id>master</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            <id>slave1</id>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            <id>slave2</id>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 </project>

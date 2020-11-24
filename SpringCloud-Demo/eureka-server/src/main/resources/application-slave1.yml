@@ -1,0 +1,15 @@
+server:
+  port: ${port.slave1} # 服务端口
+
+eureka:
+  client:
+    register-with-eureka: true #不将自己的实例注册到 Eureka Server
+    fetch-registry: true #不从 Eureka Server 中获取 Eureka 的注册表信息
+    service-url:
+      defaultZone: http://eureka-server-master:${port.master}/eureka/,http://eureka-server-slave1:${port.slave1}/eureka/,http://eureka-server-slave2:${port.slave2}/eureka/
+  instance:
+    hostname: eureka-server-slave1
+    prefer-ip-address: true
+  server:
+    enable-self-preservation: true # 开启自我保护机制，默认也是开启的
+
