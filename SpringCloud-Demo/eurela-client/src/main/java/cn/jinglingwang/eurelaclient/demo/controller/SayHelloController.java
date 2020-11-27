@@ -34,6 +34,13 @@ public class SayHelloController{
         user.name = "精灵王";
         return providerFeign.query2(user);
     }
+    @GetMapping("query3")
+    public String query3(){
+        UserDTO user = new UserDTO();
+        user.age = 18;
+        user.name = "精灵王";
+        return providerFeign.query3(user);
+    }
     @GetMapping("queryNoReturn")
     public String queryNoReturn(){
         UserDTO user = new UserDTO();
@@ -41,6 +48,10 @@ public class SayHelloController{
         user.name = "精灵王";
         providerFeign.queryNoReturn(user);
         return "do queryNoReturn success!";
+    }
+    @GetMapping("queryPort")
+    public String queryPort(){
+        return providerFeign.queryPort();
     }
 
 }

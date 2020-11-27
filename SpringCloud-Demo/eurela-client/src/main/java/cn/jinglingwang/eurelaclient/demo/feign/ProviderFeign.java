@@ -3,14 +3,17 @@ package cn.jinglingwang.eurelaclient.demo.feign;
 import cn.jinglingwang.eurelaclient.demo.config.ProviderFeignConfiguration;
 import cn.jinglingwang.eurelaclient.demo.dto.UserDTO;
 import feign.QueryMap;
+import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author : jingling
  * @Date : 2020/11/24
  */
+@LoadBalancerClient
 @FeignClient(value = "eureka-provider",configuration = ProviderFeignConfiguration.class)
 public interface ProviderFeign{
     /**
@@ -36,6 +39,9 @@ public interface ProviderFeign{
     @RequestMapping("/query")
     String query2(@SpringQueryMap UserDTO userDTO);
 
+    @RequestMapping(value = "/query",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    String query3(@QueryMap UserDTO userDTO);
+
     /**
      * 发起 get 多参数查询,但是没有返回值
      * @param userDTO
@@ -43,4 +49,7 @@ public interface ProviderFeign{
      */
     @RequestMapping("/queryNoReturn")
     void queryNoReturn(@QueryMap UserDTO userDTO);
+
+    @RequestMapping("/queryPort")
+    String queryPort();
 }
