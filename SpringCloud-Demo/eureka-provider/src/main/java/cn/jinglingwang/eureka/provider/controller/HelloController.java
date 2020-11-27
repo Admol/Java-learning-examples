@@ -29,7 +29,7 @@ public class HelloController{
             String authorization = new String(Base64.decode(header.substring(6).getBytes("UTF-8")),"UTF-8");
             System.out.println(authorization);
         }
-        return "hello, my name is eureka provider!";
+        return "hello, my name is eureka provider! my server port:"+serverPort;
     }
 
     @ResponseBody

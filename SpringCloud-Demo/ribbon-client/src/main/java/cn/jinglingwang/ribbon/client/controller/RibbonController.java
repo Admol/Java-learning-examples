@@ -1,14 +1,10 @@
 package cn.jinglingwang.ribbon.client.controller;
 
 import cn.jinglingwang.ribbon.client.feign.ProviderFeign;
-import com.netflix.loadbalancer.ILoadBalancer;
-import com.netflix.loadbalancer.LoadBalancerBuilder;
-import com.netflix.loadbalancer.Server;
-import com.netflix.loadbalancer.reactive.LoadBalancerCommand;
+import cn.jinglingwang.ribbon.client.feign.ProviderTempFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,8 +14,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 
 /**
@@ -32,6 +26,8 @@ public class RibbonController{
     private RestTemplate restTemplate;
     @Autowired
     private ProviderFeign providerFeign;
+    @Autowired
+    private ProviderTempFeign providerTempFeign;
     @Autowired
     private LoadBalancerClient loadBalancer;
 
@@ -57,5 +53,10 @@ public class RibbonController{
     @GetMapping("queryPort")
     public String queryPort(){
         return providerFeign.queryPort();
+    }
+
+    @GetMapping("queryTempPort")
+    public String queryTempPort(){
+        return providerTempFeign.queryPort();
     }
 }

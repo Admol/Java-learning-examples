@@ -1,9 +1,8 @@
 package cn.jinglingwang.ribbon.client.config;
 
-import com.netflix.client.config.DefaultClientConfigImpl;
-import com.netflix.client.config.IClientConfig;
+import cn.jinglingwang.ribbon.client.annotation.ExcludeComponentScan;
 import com.netflix.loadbalancer.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.ribbon.ZonePreferenceServerListFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,17 +14,23 @@ import org.springframework.context.annotation.Configuration;
 public class DefaultRibbonConfig{
 
     @Bean
-    public IRule ribbonRule() {
-        // 最佳策略，选择并发量最小的服务
+    public IRule iRule() {
+        //最佳策略，选择并发量最小的服务
 //        return new BestAvailableRule();
+//        return new RetryRule();
+//        return new PredicateBasedRule();
+        System.out.println("new RoundRobinRule");
         return new RoundRobinRule();
 //        return new RandomRule();
+//        return new AvailabilityFilteringRule();
+//        return new ClientConfigEnabledRoundRobinRule();
     }
 
     @Bean
     public IPing ribbonPing() {
 //        return new PingUrl();
-        return new NoOpPing();
+        return new DummyPing();
     }
+
 
 }

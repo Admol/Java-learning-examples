@@ -15,4 +15,5 @@ public interface ProviderFeign{
      */
     @RequestMapping("/queryPort")
     String queryPort();
+
 }

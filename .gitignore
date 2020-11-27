@@ -51,3 +51,10 @@ nbdist/
 /SpringCloud-Demo/demo/mvnw.cmd
 /SpringCloud-Demo/demo/mvnw
 /SpringCloud-Demo/eurela-client/mvnw.cmd
+/SpringCloud-Demo/eureka-provider/.mvn/wrapper/maven-wrapper.jar
+/SpringCloud-Demo/eureka-provider/.mvn/wrapper/maven-wrapper.properties
+/SpringCloud-Demo/eureka-provider/.mvn/wrapper/maven-wrapper.jar
+/SpringCloud-Demo/eureka-provider/.mvn/wrapper/maven-wrapper.jar
+/SpringCloud-Demo/eureka-provider/.mvn/wrapper/maven-wrapper.jar
+/SpringCloud-Demo/ribbon-client/.mvn/wrapper/maven-wrapper.jar
+/SpringCloud-Demo/ribbon-client/.mvn/wrapper/maven-wrapper.properties
