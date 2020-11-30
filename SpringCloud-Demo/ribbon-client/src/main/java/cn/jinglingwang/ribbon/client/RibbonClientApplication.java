@@ -11,7 +11,7 @@ import org.springframework.context.annotation.FilterType;
 @EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
-//@ComponentScan(excludeFilters= {@ComponentScan.Filter(type= FilterType.ANNOTATION, value= {ExcludeComponentScan.class})})
+@ComponentScan(excludeFilters= {@ComponentScan.Filter(type= FilterType.ANNOTATION, value= {ExcludeComponentScan.class})})
 public class RibbonClientApplication{
 
     public static void main(String[] args){

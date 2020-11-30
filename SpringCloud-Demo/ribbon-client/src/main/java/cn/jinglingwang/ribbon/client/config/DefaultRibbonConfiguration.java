@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date : 2020/11/26
  */
 @Configuration()
-public class DefaultRibbonConfig{
+public class DefaultRibbonConfiguration{
 
     @Bean
     public IRule iRule() {

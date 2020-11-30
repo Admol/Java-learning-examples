@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClients;
  * @author : jingling
  * @Date : 2020/11/26
  */
-@RibbonClients(defaultConfiguration = DefaultRibbonConfig.class)
-public class RibbonClientDefaultConfiguration{
+@RibbonClients(defaultConfiguration = DefaultRibbonConfiguration.class)
+public class DefaultRibbonClient{
 
 }

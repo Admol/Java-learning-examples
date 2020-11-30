@@ -4,14 +4,14 @@ import cn.jinglingwang.ribbon.client.annotation.ExcludeComponentScan;
 import com.netflix.loadbalancer.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * @author : jingling
  * @Date : 2020/11/27
  */
-//@Configuration
-//@ExcludeComponentScan
 public class ProviderTempConfiguration{
+    @Primary
     @Bean("providerTempRule")
     public IRule ribbonRule(){
         System.out.println("new ProviderTempConfiguration RandomRule");
