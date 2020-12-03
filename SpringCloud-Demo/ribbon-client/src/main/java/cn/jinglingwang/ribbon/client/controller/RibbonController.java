@@ -2,6 +2,9 @@ package cn.jinglingwang.ribbon.client.controller;
 
 import cn.jinglingwang.ribbon.client.feign.ProviderFeign;
 import cn.jinglingwang.ribbon.client.feign.ProviderTempFeign;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -21,6 +24,7 @@ import java.net.URL;
  * @Date : 2020/11/26
  */
 @RestController
+@DefaultProperties(groupKey = "DefaultGroupKey")
 public class RibbonController{
     @Autowired
     private RestTemplate restTemplate;
@@ -50,13 +54,50 @@ public class RibbonController{
     public String queryPortByRest(){
         return restTemplate.getForEntity("http://eureka-provider/queryPort",String.class).getBody();
     }
+
+//    @HystrixCommand(commandKey = "queryPort",commandProperties ={
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "3000"),//超时时间，默认1000，即1秒
+//            @HystrixProperty(name = "execution.isolation.strategy",value = "SEMAPHORE"),//信号量隔离级别
+//            @HystrixProperty(name = "execution.isolation.semaphore.maxConcurrentRequests",value = "50") //信号量模式下，最大请求并发数，默认10
+//        },fallbackMethod = "queryPortFallBack")
     @GetMapping("queryPort")
     public String queryPort(){
         return providerFeign.queryPort();
     }
 
+//    @HystrixCommand(commandKey = "queryTempPort",groupKey="eureka-provider-temp",
+//            threadPoolProperties = {
+//                @HystrixProperty(name = "coreSize", value = "30"),
+//                @HystrixProperty(name = "maxQueueSize", value = "101"),
+//                @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
+//                @HystrixProperty(name = "queueSizeRejectionThreshold", value = "15"),
+//                @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),
+//                @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1440")
+//            }
+//            ,fallbackMethod = "queryTempPortFallBack")
     @GetMapping("queryTempPort")
     public String queryTempPort(){
         return providerTempFeign.queryPort();
+    }
+
+    @HystrixCommand(groupKey = "SpecificGroupKey") // command overrides default group key
+    public Object commandOverridesGroupKey() {
+        return null;
+    }
+
+    /**
+     * queryPort 方法的失败回调
+     * @return
+     */
+    private String queryPortFallBack(){
+        return "sorry queryPort,jinglingwang.cn no back!";
+    }
+
+    /**
+     * queryTempPort 方法的失败回调
+     * @return
+     */
+    private String queryTempPortFallBack(){
+        return "sorry queryTempPort,jinglingwang.cn no back!";
     }
 }

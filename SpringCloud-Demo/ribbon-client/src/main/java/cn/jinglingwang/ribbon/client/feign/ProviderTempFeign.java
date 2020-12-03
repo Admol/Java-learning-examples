@@ -1,6 +1,7 @@
 package cn.jinglingwang.ribbon.client.feign;
 
 //import cn.jinglingwang.ribbon.client.config.ProviderTempConfiguration;
+import cn.jinglingwang.ribbon.client.fallback.ProviderTempFeignFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author : jingling
  * @Date : 2020/11/27
  */
-@FeignClient(value = "eureka-provider-temp")
+@FeignClient(value = "eureka-provider-temp",fallback = ProviderTempFeignFallback.class)
 public interface ProviderTempFeign{
 
     @RequestMapping("/queryPort")
