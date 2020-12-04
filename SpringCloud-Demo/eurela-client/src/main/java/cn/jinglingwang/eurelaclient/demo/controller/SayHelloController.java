@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+
 /**
  * @author : jingling
  * @Date : 2020/11/24
@@ -16,7 +19,11 @@ public class SayHelloController{
     private ProviderFeign providerFeign;
 
     @GetMapping("sayHello")
-    public String sayHello(){
+    public String sayHello(HttpServletRequest request){
+        Enumeration<String> names = request.getHeaderNames();
+        while(names.hasMoreElements()){
+            System.out.println(names.nextElement());
+        }
         return providerFeign.hello();
     }
 

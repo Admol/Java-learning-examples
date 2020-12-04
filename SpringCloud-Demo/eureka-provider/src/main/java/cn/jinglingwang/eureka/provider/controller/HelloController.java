@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
 
 /**
  * @author : jingling
@@ -24,6 +25,10 @@ public class HelloController{
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, path = "hello")
     public String hello(HttpServletRequest request) throws UnsupportedEncodingException{
+        Enumeration<String> names = request.getHeaderNames();
+        while(names.hasMoreElements()){
+            System.out.println(names.nextElement());
+        }
         String header = request.getHeader("Authorization");
         if(header != null && header.length() > 6){
             String authorization = new String(Base64.decode(header.substring(6).getBytes("UTF-8")),"UTF-8");
