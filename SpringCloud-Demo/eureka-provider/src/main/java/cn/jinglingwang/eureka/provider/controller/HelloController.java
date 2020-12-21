@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
@@ -59,4 +62,12 @@ public class HelloController{
         return "hei, jinglingwang, my server port is:"+serverPort;
     }
 
+
+    public static void main(String[] args) throws ScriptException{
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName( "JavaScript" );
+
+        System.out.println( engine.getClass().getName() );
+        System.out.println( "Result:" + engine.eval( "function f() { return 1; }; f() + 1;" ) );
+    }
 }

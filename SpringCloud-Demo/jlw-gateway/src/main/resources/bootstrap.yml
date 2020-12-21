@@ -1,0 +1,128 @@
+# gateway 服务端口
+server:
+    port: 9000
+
+# 实例名称
+eureka:
+    instance:
+        appname: jlw-gateway
+    client:
+        service-url:
+            # 注册中心 多个用逗号隔开
+            defaultZone: http://eureka-server-master:${port.master}/eureka/,http://eureka-server-slave1:${port.slave1}/eureka/,http://eureka-server-slave2:${port.slave2}/eureka/
+
+# eureka-server 节点的端口
+port:
+    master: 8761
+    slave1: 8762
+    slave2: 8763
+
+management:
+    endpoints:
+        web:
+            exposure:
+                #应该包含的端点ID，全部:*
+                include:  '*'
+
+
+spring:
+    zipkin:
+      base-url: http://127.0.0.1:9411/
+    sleuth:
+      sampler:
+        # 采样比例设置为1.0
+        percentage: 1.0
+    cloud:
+        gateway:
+            globalcors: # 全局跨域配置
+              cors-configurations:
+                '[/**]':
+                  allowedOrigins: "https://docs.spring.io"
+                  allowedMethods:
+                    - GET
+              add-to-simple-url-handler-mapping: true
+            httpclient: # 全局的超时时间配置，下面每个路由可以单独配置进行覆盖
+              connect-timeout: 1000
+              response-timeout: 5s
+            discovery:
+                locator:
+                    # 启用DiscoveryClient网关集成的标志
+                    enabled: true
+                    # 服务小写匹配
+                    lower-case-service-id: true
+            routes:
+                - id: eureka-provider
+                  uri: lb://eureka-provider
+                  predicates:
+                    - Path=/api/ep/**
+                  metadata:
+                    # 路由超时时间配置
+                    response-timeout: 2000
+                    connect-timeout: 1000
+                  filters:
+                    - StripPrefix=2
+                    # 限制请求大小
+#                    - name: RequestSize
+#                      args:
+#                        maxSize: 5MB
+#                    - name: Retry  # 重试
+#                      args:
+#                        retries: 3
+#                        statuses: BAD_GATEWAY
+#                        methods: GET,POST
+#                        backoff:
+#                          firstBackoff: 10ms
+#                          maxBackoff: 50ms
+#                          factor: 2
+#                          basedOnPreviousValue: false
+#                    - RedirectTo=302, https://jinglingwang.cn  #302 重定向到https://jinglingwang.cn
+#                    - PrefixPath=/mypath
+#                    - MapRequestHeader=type,source
+                    - name: AddHeader
+                    - name: RequestRateLimiter
+                      args:
+                        #允许用户每秒处理多少个请求，而不丢弃任何请求。这是令牌桶的填充速率
+                        redis-rate-limiter.replenishRate: 3
+                        #一个用户在一秒钟内允许做的最大请求数。这是令牌桶可以容纳的令牌数。将该值设置为零会阻止所有请求。
+                        redis-rate-limiter.burstCapacity: 5
+                        #一个请求花费多少令牌
+                        redis-rate-limiter.requestedTokens: 1
+                        key-resolver: "#{@ipKeyResolver}"
+                    - name: CircuitBreaker
+                      args:
+                        name: myCircuitBreaker
+                        fallbackUri: forward:/fallback
+                        statusCodes:
+                          - 500
+                          - 'NOT_FOUND'
+#                    - name: Hystrix
+#                      args:
+#                        name: fallbackcmd
+#                        fallbackUri: forward:/fallback
+
+                - id: ribbon-client
+                  uri: lb://ribbon-client
+                  predicates:
+#                      - After=2019-10-10T00:00:00+08:00[Asia/Shanghai]
+#                      - Cookie=name, jinglingwang.cn
+#                      - Header=name, jinglingwang.cnQueryRoutePredicateFactory
+#                      - Host=**.jinglingwang.cn,**.jinglingwang.com
+#                      - Method=GET,POST
+#                      - Path=/api/rc/**
+#                      - QUERY=name,jinglingwang
+                      - RemoteAddr=192.168.1.1/24 #192.168.1.1是IP  24是子网掩码
+                  filters:
+                    - AddRequestHeader=source, jinglingwang.cn # 添加请求头
+                    - AddRequestParameter=source, jinglingwang.cn #添加请求参数
+    redis:
+      host: localhost
+      port: 6479
+
+#                - id: ribbon-client-2
+#                  uri: lb://ribbon-client
+#                  predicates:
+#                    - Weight=group1, 8
+#                - id: ribbon-client-3
+#                  uri: lb://ribbon-client
+#                  predicates:
+#                    - Weight=group1, 2
