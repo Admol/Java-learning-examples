@@ -1,0 +1,51 @@
+server:
+  port: 8181
+# eureka-server 节点的端口
+port:
+  master: 8761
+  slave1: 8762
+  slave2: 8763
+
+# 实例名称
+eureka:
+  instance:
+    appname: jlw-actuator
+  client:
+    service-url:
+      # 注册中心 多个用逗号隔开
+      defaultZone: http://eureka-server-master:${port.master}/eureka/,http://eureka-server-slave1:${port.slave1}/eureka/,http://eureka-server-slave2:${port.slave2}/eureka/
+
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        pushgateway:
+          base-url: http://localhost:8761
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        #应该包含的端点ID，全部:*
+        include:  '*'
+#      base-path: /jinglingwang
+  endpoint:
+    shutdown:
+      enabled: true  #启用shutdown
+    health:
+      # 显示详细信息
+      show-details: always
+    prometheus:
+      enabled: true
+  health:
+    redis:
+      enabled: false
+
+spring:
+  security:
+    user:
+      name: jinglingwang
+      password: jinglingwang.cn
+      roles: ENDPOINT_ADMIN

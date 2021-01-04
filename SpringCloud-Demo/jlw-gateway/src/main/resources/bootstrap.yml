@@ -23,8 +23,15 @@ management:
             exposure:
                 #应该包含的端点ID，全部:*
                 include:  '*'
-
-
+            base-path: /jinglingwang
+    endpoint:
+      shutdown:
+        enabled: true  #启用shutdown
+      health:
+        show-details: always
+    health:
+      redis:
+        enabled: false
 spring:
     zipkin:
       base-url: http://127.0.0.1:9411/
