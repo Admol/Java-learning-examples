@@ -1,4 +1,4 @@
-package net.admol.jingling.demo.thread;
+package net.admol.jingling.demo.concurrent;
 
 import lombok.extern.slf4j.Slf4j;
 
