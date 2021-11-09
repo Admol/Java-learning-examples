@@ -1,4 +1,4 @@
-package com.admol.algorithm.leetcode.concurrency;
+package com.admol.algorithm.leetcode.tags.concurrency;
 
 import java.util.concurrent.Semaphore;
 import java.util.function.IntConsumer;
