@@ -1,8 +1,6 @@
-package com.admol.algorithm.leetcode.thread;
+package com.admol.algorithm.leetcode.concurrency;
 
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;

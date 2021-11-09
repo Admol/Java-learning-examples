@@ -1,4 +1,4 @@
-package com.admol.algorithm.leetcode.thread;
+package com.admol.algorithm.leetcode.concurrency;
 
 import java.util.function.IntConsumer;
 
