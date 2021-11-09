@@ -1,5 +1,6 @@
 package com.admol.algorithm.leetcode.concurrency;
 
+import java.util.concurrent.Semaphore;
 import java.util.function.IntConsumer;
 
 /**
@@ -35,11 +36,40 @@ import java.util.function.IntConsumer;
 public class Lc1116{
 
     public static void main(String[] args){
-
+        ZeroEvenOdd odd = new ZeroEvenOdd(8);
+        new Thread(()->{
+            try{
+                odd.zero(System.out::print);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }).start();
+        new Thread(()->{
+            try{
+                odd.even(System.out::print);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }).start();
+        new Thread(()->{
+            try{
+                odd.odd(System.out::print);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
 
+/**
+ * 通过信号量Semaphore实现
+ * 还可以通过同步队列、CountDownLatch、条件锁等实现
+ */
 class ZeroEvenOdd {
+
+    Semaphore zero = new Semaphore(1,true);
+    Semaphore odd = new Semaphore(0,true);
+    Semaphore even = new Semaphore(0,true);
 
     private int n;
 
@@ -49,14 +79,33 @@ class ZeroEvenOdd {
 
     // printNumber.accept(x) outputs "x", where x is an integer.
     public void zero(IntConsumer printNumber) throws InterruptedException {
-
+        for(int i = 0; i < n; i++){
+            zero.acquire();
+            printNumber.accept(0);
+            if((i & 1) == 0){
+                // 下次是奇数
+                odd.release();
+            }else{
+                // 下次是偶数
+                even.release();
+            }
+        }
     }
 
     public void even(IntConsumer printNumber) throws InterruptedException {
 
+        for(int i = 2; i <= n; i+=2){
+            even.acquire();
+            printNumber.accept(i);
+            zero.release();
+        }
     }
 
     public void odd(IntConsumer printNumber) throws InterruptedException {
-
+        for(int i = 1; i <= n; i+=2){
+            odd.acquire();
+            printNumber.accept(i);
+            zero.release();
+        }
     }
 }
