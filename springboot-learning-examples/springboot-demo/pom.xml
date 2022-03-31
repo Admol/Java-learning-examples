@@ -38,7 +38,7 @@
 		<maven-source-plugin>2.1</maven-source-plugin>
         <!--maven上传私服包配置-->
         <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
-        <spring-boot-version>1.5.9.RELEASE</spring-boot-version>
+        <spring-boot-version>2.5.12</spring-boot-version>
 
 
         <lombok.version>1.16.8</lombok.version>
