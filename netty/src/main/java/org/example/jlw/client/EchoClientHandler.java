@@ -8,7 +8,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
 
 @ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
@@ -34,7 +33,7 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // 当被通知Channel是活跃的时候，发送一条消息
-        ctx.writeAndFlush(Unpooled.copiedBuffer("Hi!,i'm client,now time:" + LocalDateTime.now().toString(), CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer("Hi!,i'm client,now time:" + LocalDateTime.now(), CharsetUtil.UTF_8));
     }
 
     /**
